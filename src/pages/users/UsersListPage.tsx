@@ -264,7 +264,7 @@ export function UsersListPage() {
                       </div>
                     </td>
                     <td className="text-xs text-slate-500">
-                      {user.responsible_admin_name ?? 'Direct Super Admin'}
+                      {user.responsible_admin_name ?? 'Unassigned'}
                     </td>
                     <td>
                       <span className={cn(
@@ -480,3 +480,4 @@ export function UsersListPage() {
     </div>
   );
 }
+

@@ -27,7 +27,9 @@ export function UserKycReviewPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const currentUser = useAuthStore((state) => state.user);
   const isSuperAdmin = useAuthStore((state) => state.user?.roles?.includes('super_admin') ?? false);
+  const currentUserName = [currentUser?.firstName, currentUser?.lastName].filter(Boolean).join(' ').trim() || currentUser?.email || 'Super Admin';
   const [remarks, setRemarks] = useState('');
   const [error, setError] = useState('');
 
@@ -42,8 +44,8 @@ export function UserKycReviewPage() {
       kycData: {
         ...(user?.kycData ?? {}),
         kycStatus: status,
-        reviewedBy: 'Super Admin',
-        approvedBy: status === 'Approved' ? 'Super Admin' : '',
+        reviewedBy: currentUserName,
+        approvedBy: status === 'Approved' ? currentUserName : '',
         officeRemarks: remarks,
         reviewedAt: new Date().toISOString(),
       },
@@ -196,3 +198,4 @@ function formatValue(value: any): React.ReactNode {
 function isImageUrl(url: string) {
   return /\.(png|jpe?g|gif|webp)(\?|$)/i.test(url) || url.includes('/image/upload/');
 }
+

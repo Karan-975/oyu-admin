@@ -72,7 +72,7 @@ export function KycCompletionPage() {
         });
       }
       setError('');
-      setSuccess('KYC submitted successfully. Super Admin verification is now pending.');
+      setSuccess('KYC submitted successfully. Verification is now pending.');
     },
     onError: (err: any) => {
       setSuccess('');
@@ -158,7 +158,7 @@ export function KycCompletionPage() {
       {!approved && (
         <div className="flex gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
           <LockKeyhole className="mt-0.5 shrink-0" size={18} />
-          <p>Operational access remains locked until Super Admin approval. Notifications, profile settings, and this KYC page remain available.</p>
+          <p>Operational access remains locked until approval. Notifications, profile settings, and this KYC page remain available.</p>
         </div>
       )}
 
@@ -224,7 +224,7 @@ export function KycCompletionPage() {
           <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="flex items-center gap-3 text-sm text-slate-500">
               <FileCheck2 className="text-teal-600" size={22} />
-              {awaiting ? 'You may update and resubmit while verification is pending.' : 'Your submission will be sent to Super Admin for verification.'}
+              {awaiting ? 'You may update and resubmit while verification is pending.' : 'Your submission will be sent for verification.'}
             </div>
             <button disabled={mutation.isPending || Boolean(uploading)} className="flex items-center gap-2 rounded-lg bg-teal-700 px-6 py-3 text-sm font-bold text-white hover:bg-teal-800 disabled:opacity-50">
               {mutation.isPending && <Loader2 size={16} className="animate-spin" />}
@@ -266,3 +266,4 @@ function UploadField({ label, value, busy, onFile }: { label: string; value?: st
 function Check({ label, checked, onChange }: { label: string; checked: boolean; onChange: (value: boolean) => void }) {
   return <label className="flex items-start gap-3 rounded-lg bg-slate-50 p-3 text-sm text-slate-600"><input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} className="mt-1 rounded border-slate-300" /><span>{label}</span></label>;
 }
+

@@ -83,7 +83,7 @@ export function GrievanceDetailPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 max-w-5xl mx-auto min-w-0">
       {/* Header */}
       <div className="flex items-center justify-between">
         <button onClick={() => navigate('/grievances')} className="flex items-center gap-2 text-slate-500 hover:text-slate-700 text-sm transition-colors">
@@ -113,9 +113,9 @@ export function GrievanceDetailPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 min-w-0">
         {/* Left column: Grievance info */}
-        <div className="md:col-span-1 space-y-6">
+        <div className="md:col-span-1 space-y-6 min-w-0">
           <div className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm space-y-4">
             <h3 className="font-bold text-slate-800 border-b border-slate-50 pb-2">Grievance Info</h3>
             <div className="space-y-3.5">
@@ -181,7 +181,7 @@ export function GrievanceDetailPage() {
         </div>
 
         {/* Right column: Grievance title, description, and comments thread */}
-        <div className="md:col-span-2 space-y-6">
+        <div className="md:col-span-2 space-y-6 min-w-0">
           <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm space-y-4">
             <div>
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Title</span>
@@ -189,7 +189,7 @@ export function GrievanceDetailPage() {
             </div>
             <div className="border-t border-slate-50 pt-3">
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Description</span>
-              <p className="text-sm text-slate-600 mt-1 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100/50">
+              <p className="text-sm text-slate-600 mt-1 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100/50 whitespace-pre-wrap break-words">
                 {grievance.description}
               </p>
             </div>
@@ -211,7 +211,7 @@ export function GrievanceDetailPage() {
                       <span className="font-bold text-slate-600">{comment.first_name} {comment.last_name} {comment.is_internal && <span className="ml-1 text-[9px] text-amber-700 bg-amber-100/70 px-1 rounded uppercase font-extrabold">Internal</span>}</span>
                       <span>{new Date(comment.created_at).toLocaleString()}</span>
                     </div>
-                    <p className="text-xs text-slate-700 leading-relaxed font-medium">{comment.comment}</p>
+                    <p className="text-xs text-slate-700 leading-relaxed font-medium whitespace-pre-wrap break-words">{comment.comment}</p>
                   </div>
                 ))
               ) : (
@@ -255,3 +255,4 @@ export function GrievanceDetailPage() {
     </div>
   );
 }
+

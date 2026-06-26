@@ -99,6 +99,7 @@ export function UserFormPage() {
 
   const isSuperAdmin = currentUser?.roles?.includes('super_admin');
   const isNgoAdmin = currentUser?.roles?.includes('ngo_admin');
+  const currentUserName = [currentUser?.firstName, currentUser?.lastName].filter(Boolean).join(' ').trim() || currentUser?.email || 'Admin';
 
   const { data: existingUser, isLoading: loadingUser } = useQuery({
     queryKey: ['user', id],
@@ -268,6 +269,15 @@ export function UserFormPage() {
         if (!payload.ngoId) delete payload.ngoId;
         if (!payload.responsibleNgoAdminId) delete payload.responsibleNgoAdminId;
       }
+
+      if ((isSuperAdmin || isNgoAdmin) && payload.kycData) {
+        payload.kycData = {
+          ...payload.kycData,
+          reviewedBy: payload.kycData.reviewedBy?.trim() || currentUserName,
+          approvedBy: payload.kycData.approvedBy?.trim() || currentUserName,
+        };
+      }
+
       return isEditing ? usersApi.update(id!, payload) : usersApi.create(payload);
     },
     onSuccess: () => {
@@ -902,3 +912,4 @@ export function UserFormPage() {
     </div>
   );
 }
+
